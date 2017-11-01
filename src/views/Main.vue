@@ -3,7 +3,7 @@
 </style>
 <template>
     <div class="main" :class="{'main-hide-text': hideMenuText}">
-        <div class="sidebar-menu-con" :style="{width: hideMenuText?'60px':'200px', overflow: hideMenuText ? 'visible' : 'auto', background: $store.state.menuTheme === 'dark'?'#495060':'white'}">
+        <div class="sidebar-menu-con" :style="{width: hideMenuText?'60px':'200px', overflow: hideMenuText ? 'visible' : 'auto', background: $store.state.menuTheme === 'dark'?'#495060':'white'}" v-slimMenu>
             <div class="logo-con">
                 <img v-show="!hideMenuText"  src="../images/logo-white.png" key="max-logo" />
                 <img v-show="hideMenuText" src="../images/logo-min-white.png" key="min-logo" />

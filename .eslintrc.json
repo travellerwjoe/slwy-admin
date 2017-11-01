@@ -13,11 +13,14 @@
     "plugins": [ "html", "standard" ],
     "rules": {
         "indent": ["error", 4, { "SwitchCase": 1 }],
-        "quotes": ["error", "single"],
-        "semi": ["error", "always"],
-        "no-console": ["error"],
+        // "quotes": ["error", "single"],
+        "semi": [ 0, "never"],
+        "no-console": "warn",
         "no-empty": 2,
         "no-eq-null": 2,
-        "no-new": 0
+        "no-new": 0,
+        "space-before-function-paren":"off",
+        "one-var":"off",
+        "no-unused-vars":"warn"
     }
 }

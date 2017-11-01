@@ -14,10 +14,14 @@ import zhLocale from 'iview/src/locale/lang/zh-CN';
 import enLocale from 'iview/src/locale/lang/en-US';
 import zhTLocale from 'iview/src/locale/lang/zh-TW';
 
+import slimMenu from './directives/slimMenu'
+
 Vue.use(VueRouter);
 Vue.use(Vuex);
 Vue.use(VueI18n);
 Vue.use(iView);
+
+Vue.directive('slimMenu', slimMenu)
 
 // 自动设置语言
 const navLang = navigator.language;
