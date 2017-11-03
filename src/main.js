@@ -15,7 +15,8 @@ import enLocale from 'iview/src/locale/lang/en-US';
 import zhTLocale from 'iview/src/locale/lang/zh-TW';
 
 import VueSlimScroll from 'vue-slimscroll'
-import demo from './directives/demo'
+
+import DemoBlock from './components/DemoBlock'
 
 Vue.use(VueRouter);
 Vue.use(Vuex);
@@ -23,7 +24,8 @@ Vue.use(VueI18n);
 Vue.use(iView);
 Vue.use(VueSlimScroll)
 
-Vue.directive('demo', demo)
+Vue.component('DemoBlock', DemoBlock)
+
 
 // 自动设置语言
 const navLang = navigator.language;

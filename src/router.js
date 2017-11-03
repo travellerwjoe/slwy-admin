@@ -70,7 +70,7 @@ export const appRouter = [
         title: { i18n: 'home' },
         name: 'home',
         component: Main,
-        children:[{
+        children: [{
             path: 'index',
             title: { i18n: 'home' },
             name: 'home_index',
@@ -197,6 +197,16 @@ export const appRouter = [
             { path: 'table2image', title: '表格转图片', name: 'table-to-image', icon: 'images', component: resolve => { require(['./views/tables/table-to-image.vue'], resolve); } }
         ]
     },
+    // {
+    //     path: '/charts',
+    //     icon: 'ios-pie',
+    //     name: 'charts',
+    //     title: '图表',
+    //     component: Main,
+    //     children: [
+    //         { path: 'index', title: '图表', 'name': 'charts', component: resolve => { require(['./views/charts'])} }
+    //     ]
+    // },
     {
         path: '/advanced-router',
         icon: 'ios-infinite',
