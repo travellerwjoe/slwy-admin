@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import iView from 'iview';
 import VueRouter from 'vue-router';
-import {routers, otherRouter, appRouter} from './router';
+import { routers, otherRouter, appRouter } from './router';
 import Vuex from 'vuex';
 import Util from './libs/util';
 import App from './app.vue';
@@ -14,14 +14,16 @@ import zhLocale from 'iview/src/locale/lang/zh-CN';
 import enLocale from 'iview/src/locale/lang/en-US';
 import zhTLocale from 'iview/src/locale/lang/zh-TW';
 
-import slimMenu from './directives/slimMenu'
+import VueSlimScroll from 'vue-slimscroll'
+import demo from './directives/demo'
 
 Vue.use(VueRouter);
 Vue.use(Vuex);
 Vue.use(VueI18n);
 Vue.use(iView);
+Vue.use(VueSlimScroll)
 
-Vue.directive('slimMenu', slimMenu)
+Vue.directive('demo', demo)
 
 // 自动设置语言
 const navLang = navigator.language;
@@ -68,7 +70,7 @@ router.beforeEach((to, from, next) => {
                 name: 'home_index'
             }); */
         } else {
-            
+
             if (Util.getRouterObjByName([otherRouter, ...appRouter], to.name).access !== undefined) {  // 判断用户是否有权限访问当前页
                 if (Util.getRouterObjByName([otherRouter, ...appRouter], to.name).access === parseInt(Cookies.get('access'))) {
                     Util.toDefaultPage([otherRouter, ...appRouter], to.name, router, next);  // 如果在地址栏输入的是一级菜单则默认打开其第一个二级菜单的页面
@@ -123,21 +125,21 @@ const store = new Vuex.Store({
 
     },
     mutations: {
-        setTagsList (state, list) {
+        setTagsList(state, list) {
             state.tagsList.push(...list);
         },
-        closePage (state, name) {
+        closePage(state, name) {
             state.cachePage.forEach((item, index) => {
                 if (item === name) {
                     state.cachePage.splice(index, 1);
                 }
             });
         },
-        increateTag (state, tagObj) {
+        increateTag(state, tagObj) {
             state.cachePage.push(tagObj.name);
             state.pageOpenedList.push(tagObj);
         },
-        initCachepage (state) {
+        initCachepage(state) {
             if (localStorage.pageOpenedList) {
                 state.cachePage = JSON.parse(localStorage.pageOpenedList).map(item => {
                     if (item.name !== 'home_index') {
@@ -146,14 +148,14 @@ const store = new Vuex.Store({
                 });
             }
         },
-        removeTag (state, name) {
+        removeTag(state, name) {
             state.pageOpenedList.map((item, index) => {
                 if (item.name === name) {
                     state.pageOpenedList.splice(index, 1);
                 }
             });
         },
-        pageOpenedList (state, get) {
+        pageOpenedList(state, get) {
             let openedPage = state.pageOpenedList[get.index];
             if (get.argu) {
                 openedPage.argu = get.argu;
@@ -164,7 +166,7 @@ const store = new Vuex.Store({
             state.pageOpenedList.splice(get.index, 1, openedPage);
             localStorage.pageOpenedList = JSON.stringify(state.pageOpenedList);
         },
-        clearAllTags (state) {
+        clearAllTags(state) {
             state.pageOpenedList.splice(1);
             router.push({
                 name: 'home_index'
@@ -172,7 +174,7 @@ const store = new Vuex.Store({
             state.cachePage = [];
             localStorage.pageOpenedList = JSON.stringify(state.pageOpenedList);
         },
-        clearOtherTags (state, vm) {
+        clearOtherTags(state, vm) {
             let currentName = vm.$route.name;
             let currentIndex = 0;
             state.pageOpenedList.forEach((item, index) => {
@@ -192,16 +194,16 @@ const store = new Vuex.Store({
             state.cachePage = newCachepage;
             localStorage.pageOpenedList = JSON.stringify(state.pageOpenedList);
         },
-        setOpenedList (state) {
+        setOpenedList(state) {
             state.pageOpenedList = localStorage.pageOpenedList ? JSON.parse(localStorage.pageOpenedList) : [otherRouter.children[0]];
         },
-        setCurrentPath (state, pathArr) {
+        setCurrentPath(state, pathArr) {
             state.currentPath = pathArr;
         },
-        setCurrentPageName (state, name) {
+        setCurrentPageName(state, name) {
             state.currentPageName = name;
         },
-        addOpenSubmenu (state, name) {
+        addOpenSubmenu(state, name) {
             let hasThisName = false;
             let isEmpty = false;
             if (name.length === 0) {
@@ -214,25 +216,25 @@ const store = new Vuex.Store({
                 state.openedSubmenuArr.push(name);
             }
         },
-        clearOpenedSubmenu (state) {
+        clearOpenedSubmenu(state) {
             state.openedSubmenuArr.length = 0;
         },
-        changeMenuTheme (state, theme) {
+        changeMenuTheme(state, theme) {
             state.menuTheme = theme;
         },
-        changeMainTheme (state, mainTheme) {
+        changeMainTheme(state, mainTheme) {
             state.theme = mainTheme;
         },
-        lock (state) {
+        lock(state) {
             Cookies.set('locking', '1');
         },
-        unlock (state) {
+        unlock(state) {
             Cookies.set('locking', '0');
         },
-        setMenuList (state, menulist) {
+        setMenuList(state, menulist) {
             state.menuList = menulist;
         },
-        updateMenulist (state) {
+        updateMenulist(state) {
             let accessCode = parseInt(Cookies.get('access'));
             let menuList = [];
             appRouter.forEach((item, index) => {
@@ -278,14 +280,14 @@ const store = new Vuex.Store({
             });
             state.menuList = menuList;
         },
-        setAvator (state, path) {
+        setAvator(state, path) {
             localStorage.avatorImgPath = path;
         },
-        switchLang (state, lang) {
+        switchLang(state, lang) {
             state.lang = lang;
             Vue.config.lang = lang;
         },
-        handleFullScreen (state) {
+        handleFullScreen(state) {
             let main = document.getElementById('main');
             if (state.isFullScreen) {
                 if (document.exitFullscreen) {
@@ -309,7 +311,7 @@ const store = new Vuex.Store({
                 }
             }
         },
-        changeFullScreenState (state) {
+        changeFullScreenState(state) {
             state.isFullScreen = !state.isFullScreen;
         }
     },
@@ -326,7 +328,7 @@ new Vue({
     data: {
         currentPageName: ''
     },
-    mounted () {
+    mounted() {
         this.currentPageName = this.$route.name;
         this.$store.commit('initCachepage');
         // 权限菜单过滤相关
@@ -345,7 +347,7 @@ new Vue({
             this.$store.commit('changeFullScreenState');
         });
     },
-    created () {
+    created() {
         let tagsList = [];
         appRouter.map((item) => {
             if (item.children.length <= 1) {

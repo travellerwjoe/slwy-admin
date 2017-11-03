@@ -7,7 +7,7 @@
         <Row>
             <Col span="8">
                 <Row>
-                    <Card>
+                    <Card v-demo>
                         <Row type="flex" class="user-infor">
                             <Col span="8">
                                 <Row class-name="made-child-con-middle" type="flex" align="middle">
