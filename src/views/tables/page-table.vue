@@ -1,6 +1,6 @@
 <template>
     <div>
-        <EditableTable :table-data="tableData1" :columns-list="tableColumns1" :saveEdit="saveEdit" :deleteRow="deleteRow"></EditableTable>
+        <CanEditTable v-model="tableData1" :columns-list="tableColumns1" :saveEdit="saveEdit" :deleteRow="deleteRow"></CanEditTable>
         <div style="margin: 10px;overflow: hidden">
             <div style="float: right;">
                 <Page :total="100" :current="1" @on-change="changePage"></Page>
@@ -9,11 +9,11 @@
     </div>
 </template>
 <script>
-    import EditableTable from './editableTable.vue';
+    import CanEditTable from './components/canEditTable.vue';
     export default {
         name: 'multiPageTable',
         components: {
-            EditableTable
+            CanEditTable
         },
         data () {
             return {

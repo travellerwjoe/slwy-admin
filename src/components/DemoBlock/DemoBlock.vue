@@ -1,5 +1,7 @@
 <template>
-
+    <div class="demo-block">
+        <slot></slot>
+    </div>
 </template>
 
 <script>
@@ -88,7 +90,7 @@
                 console.log(code)
             }
         },
-        beforeCreate () {
+        mounted () {
             console.log(this.$slots.default)
             this.generateDemoCode()
         }

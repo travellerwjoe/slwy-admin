@@ -69,6 +69,7 @@ export const appRouter = [
         path: '/home',
         title: { i18n: 'home' },
         name: 'home',
+        icon: 'home',
         component: Main,
         children: [{
             path: 'index',
@@ -194,19 +195,20 @@ export const appRouter = [
             { path: 'editableTable', title: '可编辑表格', name: 'editable-table', icon: 'edit', component: resolve => { require(['./views/tables/editable-table.vue'], resolve); } },
             { path: 'searchableTable', title: '可搜索表格', name: 'searchable-table', icon: 'search', component: resolve => { require(['./views/tables/searchable-table.vue'], resolve); } },
             { path: 'exportableTable', title: '表格导出数据', name: 'exportable-table', icon: 'code-download', component: resolve => { require(['./views/tables/exportable-table.vue'], resolve); } },
-            { path: 'table2image', title: '表格转图片', name: 'table-to-image', icon: 'images', component: resolve => { require(['./views/tables/table-to-image.vue'], resolve); } }
+            { path: 'table2image', title: '表格转图片', name: 'table-to-image', icon: 'images', component: resolve => { require(['./views/tables/table-to-image.vue'], resolve); } },
+            { path: 'pageTable', title: '带分页表格', name: 'page-table', icon: 'ios-book', component: resolve => { require(['./views/tables/page-table.vue'], resolve); } }
         ]
     },
-    // {
-    //     path: '/charts',
-    //     icon: 'ios-pie',
-    //     name: 'charts',
-    //     title: '图表',
-    //     component: Main,
-    //     children: [
-    //         { path: 'index', title: '图表', 'name': 'charts', component: resolve => { require(['./views/charts'])} }
-    //     ]
-    // },
+    {
+        path: '/charts',
+        icon: 'ios-pie',
+        name: 'charts',
+        title: '图表',
+        component: Main,
+        children: [
+            { path: 'index', title: '图表', name: 'charts_index', component: resolve => { require(['./views/charts/charts'], resolve) } }
+        ]
+    },
     {
         path: '/advanced-router',
         icon: 'ios-infinite',

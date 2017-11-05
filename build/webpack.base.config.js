@@ -72,7 +72,9 @@ module.exports = {
         extensions: ['.js', '.vue'],
         alias: {
             'vue': 'vue/dist/vue.esm.js',
-            '@': resolve('../src')
+            '@': resolve('../src'),
+            '@c': resolve('../src/components'),
+            '@v': resolve('../src/views')
         }
     }
 };

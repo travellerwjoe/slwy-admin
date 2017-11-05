@@ -216,7 +216,7 @@ export default {
             });
         },
         init () {
-            this.userForm.name = 'Lison';
+            this.userForm.name = 'Joe.Wu';
             this.userForm.cellphone = '17712345678';
             this.initPhone = '17712345678';
             this.userForm.company = 'TalkingData';
