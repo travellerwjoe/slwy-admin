@@ -1,11 +1,17 @@
 <template>
     <div>
-        <CanEditTable v-model="tableData1" :columns-list="tableColumns1" :saveEdit="saveEdit" :deleteRow="deleteRow"></CanEditTable>
-        <div style="margin: 10px;overflow: hidden">
-            <div style="float: right;">
-                <Page :total="100" :current="1" @on-change="changePage"></Page>
-            </div>
-        </div>
+        <Row>
+            <Col span="24">
+            <Card>
+                <CanEditTable v-model="tableData1" :columns-list="tableColumns1" :saveEdit="saveEdit" :deleteRow="deleteRow"></CanEditTable>
+                <div style="margin: 10px;overflow: hidden">
+                    <div style="float: right;">
+                        <Page :total="100" :current="1" @on-change="changePage"></Page>
+                    </div>
+                </div>
+            </Card>
+            </Col>
+        </Row>
     </div>
 </template>
 <script>
@@ -15,11 +21,10 @@
         components: {
             CanEditTable
         },
-        data () {
+        data() {
             return {
                 tableData1: this.mockTableData1(),
-                tableColumns1: [
-                    {
+                tableColumns1: [{
                         title: '名称',
                         key: 'name'
                     },
@@ -30,7 +35,6 @@
                             const row = params.row;
                             const color = row.status === 1 ? 'blue' : row.status === 2 ? 'green' : 'red';
                             const text = row.status === 1 ? '构建中' : row.status === 2 ? '构建完成' : '构建失败';
-
                             return h('Tag', {
                                 props: {
                                     type: 'dot',
@@ -69,7 +73,7 @@
             };
         },
         methods: {
-            mockTableData1 () {
+            mockTableData1() {
                 let data = [];
                 for (let i = 0; i < 10; i++) {
                     data.push({
@@ -82,7 +86,7 @@
                 }
                 return data;
             },
-            formatDate (date) {
+            formatDate(date) {
                 const y = date.getFullYear();
                 let m = date.getMonth() + 1;
                 m = m < 10 ? '0' + m : m;
@@ -90,16 +94,16 @@
                 d = d < 10 ? ('0' + d) : d;
                 return y + '-' + m + '-' + d;
             },
-            changePage () {
+            changePage() {
                 // 这里直接更改了模拟的数据，真实使用场景应该从服务端获取数据
                 this.tableData1 = this.mockTableData1();
             },
-            saveEdit (index, success, fail) {
+            saveEdit(index, success, fail) {
                 success(() => {
                     this.$Message.success('保存成功');
                 });
             },
-            deleteRow (index, success, fail) {
+            deleteRow(index, success, fail) {
                 this.tableData1.splice(index, 1);
                 this.changePage();
                 success(() => {

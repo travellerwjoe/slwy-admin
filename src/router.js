@@ -210,6 +210,16 @@ export const appRouter = [
         ]
     },
     {
+        path: '/map',
+        icon: 'map',
+        name: 'map',
+        title: '地图',
+        component: Main,
+        children: [
+            { path: 'index', title: '地图', name: 'map_index', component: resolve => { require(['./views/map/map'], resolve) } }
+        ]
+    },
+    {
         path: '/advanced-router',
         icon: 'ios-infinite',
         name: 'advanced-router',
